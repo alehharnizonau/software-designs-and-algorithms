@@ -6,14 +6,15 @@ export abstract class Shape {
     protected filled: boolean;
 
     constructor(points: Point[]);
-    constructor(points: Point[], color?: string, filled?: boolean) {
-        if (points.length < 3) {
+    constructor(points: Point[], color: string, filled: boolean);
+    constructor(...args: [Point[]] | [Point[], string, boolean]) {
+        if (args[0].length < 3) {
             throw new Error()
         }
 
-        this.points = points;
-        this.color = color || 'green';
-        this.filled = filled === undefined ? true : filled;
+        this.points = args[0];
+        this.color = args[1] || 'green';
+        this.filled = args[2] === undefined ? true : args[2];
     }
 
     toString() {
@@ -26,5 +27,5 @@ export abstract class Shape {
             : acc + cum.distance(this.points[index + 1]), 0);
     }
 
-    abstract getType(): string;
+    // abstract getType(): string;
 }

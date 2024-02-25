@@ -20,13 +20,14 @@ export class Point {
 
     distance(): number;
     distance(x: Point): number;
-    distance(x?: number | Point, y?: number): number {
-        if (x instanceof Point) {
-            const [x1, y1] = x.toString().replace(/[\(\)\s]/g, "").split(',');
+    distance(x: number, y: number): number;
+    distance(...args: undefined | [Point] | [number, number]): number {
+        if (args[0] instanceof Point) {
+            const [x1, y1] = args[0].toString().replace(/[\(\)\s]/g, "").split(',');
             return this.calculate({x2: Number(x1), y2: Number(y1), x1: this.x, y1: this.y});
         }
 
-        return this.calculate({x2: this.x, y2: this.y, x1: x || 0, y1: y || 0});
+        return this.calculate({x2: this.x, y2: this.y, x1: args[0] || 0, y1: args[1] || 0});
     }
 
     calculate({x1, x2, y1, y2}: Points): number {
