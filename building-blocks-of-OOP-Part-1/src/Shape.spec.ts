@@ -2,6 +2,9 @@ import {Shape} from "./Shape";
 import {Point} from "./Point";
 
 class TestShape extends Shape {
+    getType(): string {
+        return "";
+    }
 }
 
 describe("Shape", () => {

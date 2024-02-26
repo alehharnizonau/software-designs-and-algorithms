@@ -27,5 +27,5 @@ export abstract class Shape {
             : acc + cum.distance(this.points[index + 1]), 0);
     }
 
-    // abstract getType(): string;
+    abstract getType(): string;
 }
