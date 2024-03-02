@@ -1,4 +1,5 @@
 import {Comparable} from "./Comparable";
+import {ItemWeightComparator} from "./ItemWeightComparator";
 
 export abstract class Item implements Comparable<Item> {
     static idCounter: number = 0;
@@ -20,11 +21,12 @@ export abstract class Item implements Comparable<Item> {
     }
 
     compareTo(other: Item): number {
-        if (this.value > other.value) {
+        const key = other instanceof ItemWeightComparator ? 'weight' : 'value';
+        if (this[key] > other[key]) {
             return 1
         }
 
-        if (this.value < other.value) {
+        if (this[key] < other[key]) {
             return -1;
         }
 
