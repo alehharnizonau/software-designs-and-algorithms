@@ -1,8 +1,8 @@
 import {Item} from "./Item";
 
 export class Consumable extends Item {
-    isConsumed: boolean;
-    isSpoiled: boolean;
+    public isConsumed: boolean;
+    public isSpoiled: boolean;
 
     constructor(name: string, value: number, weight: number, isSpoiled = false) {
         super(name, value, weight);
@@ -10,7 +10,7 @@ export class Consumable extends Item {
         this.isConsumed = false;
     }
 
-    use(): string {
+    public use(): string {
         if (this.isConsumed) {
             return `There's nothing left of the ${this.name} to consume.`
         }

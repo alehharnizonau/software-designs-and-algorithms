@@ -3,9 +3,9 @@ import {Comparable} from "./Comparable";
 export abstract class Item implements Comparable<Item> {
     static idCounter: number = 0;
     readonly name: string;
-    value: number;
-    weight: number;
     readonly id: number;
+    public value: number;
+    public weight: number;
 
     constructor(name: string, value: number, weight: number) {
         this.name = name;
@@ -15,28 +15,28 @@ export abstract class Item implements Comparable<Item> {
         this.id = Item.idCounter;
     }
 
-    static resetIdCounter(): void {
+    public static resetIdCounter(): void {
         Item.idCounter = 0;
     }
 
-    compareTo(other: Item): number {
+    public compareTo(other: Item): number {
         const key = other instanceof Item ? 'value' : 'weight';
         if (this[key] > other[key]) {
-            return 1
+            return 1;
         }
 
         if (this[key] < other[key]) {
             return -1;
         }
 
-        return this.name.localeCompare(other.name)
+        return this.name.localeCompare(other.name);
     }
 
-    toString() {
+    public toString(): string {
         return `${this.name} - Value: ${this.value.toFixed(2)}, Weight: ${this.weight.toFixed(2)}`
     }
 
-    getId(): number {
+    public getId(): number {
         return this.id;
     }
 }

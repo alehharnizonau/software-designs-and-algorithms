@@ -5,7 +5,7 @@ export class Sword extends Weapon {
         super('sword', baseDamage, baseDurability, value, weight);
     }
 
-    polish() {
+    public polish(): void {
         if (super.getEffectiveDamage() < 1.25 * this.baseDamage) {
             this.damageModifier += Weapon.MODIFIER_CHANGE_RATE;
         }

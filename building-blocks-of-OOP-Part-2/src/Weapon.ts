@@ -2,7 +2,7 @@ import {Item} from "./Item";
 
 export abstract class Weapon extends Item {
     public static MODIFIER_CHANGE_RATE = 0.05;
-    baseDurability: number;
+    protected baseDurability: number;
     protected baseDamage: number;
     protected damageModifier: number = 0;
     protected durabilityModifier: number = 0;
@@ -13,21 +13,21 @@ export abstract class Weapon extends Item {
         this.baseDurability = baseDurability;
     }
 
-    getEffectiveDamage(): number {
+    public getEffectiveDamage(): number {
         return this.baseDamage + this.damageModifier;
     }
 
-    getEffectiveDurability(durabilityModifier?: number) {
+    public getEffectiveDurability(durabilityModifier?: number): number {
         return durabilityModifier
             ? (this.baseDurability + durabilityModifier)
             : (this.baseDurability + this.durabilityModifier);
     }
 
-    toString(): string {
+    public toString(): string {
         return `${super.toString()}, Damage: ${this.getEffectiveDamage().toFixed(2)}, Durability: ${(this.getEffectiveDurability() * 100).toFixed(2)}%`
     }
 
-    use(): string {
+    public use(): string {
         if (this.baseDurability <= 0) {
             return `You can\'t use the ${this.name}, it is broken.`
         }
