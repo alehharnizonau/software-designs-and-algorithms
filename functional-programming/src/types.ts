@@ -1,27 +1,27 @@
-import { Maybe } from './fp/maybe';
+import {Maybe} from './fp/maybe';
 
 export interface Point {
-  x: number;
-  y: number;
+    x: number;
+    y: number;
 }
 
 export interface User {
-  name: string;
-  position: Point;
+    name: string;
+    position: Point;
 }
 
 export enum Demand {
-  Driving = 'Driving',
-  Fighting = 'Fighting',
-  Fishing = 'Fishing'
+    Driving = 'Driving',
+    Fighting = 'Fighting',
+    Fishing = 'Fishing'
 }
 
 export interface ClientUser extends User {
-  demands: Maybe<Array<Demand>>;
-  reward: number;
+    demands: Maybe<Array<Demand>>;
+    reward: number;
 }
 
 export interface ExecutorUser extends User {
-  possibilities: Array<Demand>;
+    possibilities: Array<Demand>;
 }
 

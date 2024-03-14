@@ -1,4 +1,4 @@
-import { Maybe, none, some } from './maybe';
+import {Maybe, none, some} from './maybe';
 
 export const constant = <A>(a: A) => () => a;
 
@@ -7,11 +7,9 @@ export const constant = <A>(a: A) => () => a;
  */
 export function flow<A, B, C>(fa: (a: A) => B, fb: (b: B) => C): (a: A) => C;
 export function flow<A, B, C, D>(fa: (a: A) => B, fb: (b: B) => C, fc: (c: C) => D): (a: A) => D;
+export function flow<A, B, C, D, E>(fa: (a: A) => B, fb: (b: B) => C, fc: (c: C) => D, fd: (d: D) => E): (a: A) => E;
 export function flow(...fns: Array<(...args: Array<any>) => any>) {
-  return (a: any) => fns.reduce(
-    (acc, fn) => fn(acc),
-    a,
-  );
+    return (a: any) => fns.reduce((acc, fn) => fn(acc), a);
 }
 
 /**
@@ -19,8 +17,11 @@ export function flow(...fns: Array<(...args: Array<any>) => any>) {
  * Handy for automatic data typing
  */
 export function pipe<A, B>(a: A, fb: (a: A) => B): B;
+export function pipe<A, B, C>(a: A, fb: (a: A) => B, fc: (b: B) => C): C;
+export function pipe<A, B, C, D>(a: A, fb: (a: A) => B, fc: (b: B) => C, fd: (c: C) => D): D;
+export function pipe<A, B, C, D, E>(a: A, fb: (a: A) => B, fc: (b: B) => C, fd: (c: C) => D, fe: (d: D) => E): E;
 export function pipe(a: any, ...fns: Array<(...args: Array<any>) => any>) {
-
+    return fns.reduce((acc, fn) => fn(acc), a);
 }
 
 export type Predicate<A> = (a: A) => boolean
@@ -33,8 +34,8 @@ export type Predicate<A> = (a: A) => boolean
  * See examples in the tests
  */
 export const matcher = <A, R>(...predicates: Array<[Predicate<A>, (a: A) => R]>) => (a) => {
-  const i = predicates.findIndex(([predicate]) => predicate(a));
-  return i > -1 ? predicates[i][1](a) : undefined;
+    const i = predicates.findIndex(([predicate]) => predicate(a));
+    return i > -1 ? predicates[i][1](a) : undefined;
 };
 
 /**
