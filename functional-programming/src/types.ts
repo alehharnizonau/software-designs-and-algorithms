@@ -21,6 +21,18 @@ export interface ClientUser extends User {
     reward: number;
 }
 
+export interface RawClientUser extends Omit<ClientUser, 'demands'> {
+    demands: Array<Demand>;
+}
+
+export interface Clients extends ClientUser {
+    distance: number;
+}
+
+export type RawClients = Omit<ClientUser, 'demands'>;
+
+export type AggregatedClients = Omit<Clients, 'demands' | 'position'>;
+
 export interface ExecutorUser extends User {
     possibilities: Array<Demand>;
 }
