@@ -1,4 +1,4 @@
-import {IShipment, IShipmentData} from "./types";
+import {IShipment, IShipmentData, ShipmentType} from "./types";
 import {AirEastStrategy, ChicagoSprintStrategy, PacificParcelStrategy, ShipmentStrategy, Shipper} from "./Shipper";
 
 export class Shipment implements IShipment {
@@ -34,7 +34,7 @@ export class Shipment implements IShipment {
         const shipper: Shipper = new Shipper();
         shipper.setStrategy(this.getShipperStrategy());
 
-        return shipper.getCostStrategy(this.weight);
+        return shipper.getCostStrategy(this.getTypeOfShipment(), this.weight);
     }
 
     private getShipperStrategy(): ShipmentStrategy {
@@ -51,4 +51,14 @@ export class Shipment implements IShipment {
                 return new AirEastStrategy();
         }
     };
+
+    private getTypeOfShipment(): ShipmentType {
+        if (this.weight <= 15) {
+            return ShipmentType.Letter;
+        }
+        if (this.weight <= 160) {
+            return ShipmentType.Package;
+        }
+        return ShipmentType.Oversized;
+    }
 }

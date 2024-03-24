@@ -3,9 +3,9 @@ import {Client} from "./src/Client";
 
 const data: IShipmentData = {
     shipmentID: 1,
-    weight: 50,
+    weight: 160,
     fromAddress: 'Atlanta',
-    fromZipCode: '12222',
+    fromZipCode: '72222',
     toAddress: 'Detroit',
     toZipCode: '77777'
 }
