@@ -42,8 +42,7 @@ export class ChicagoSprintStrategy implements ShipmentStrategy {
     }
 
     public getOversizedCost(weight: number): number {
-        this.cost = 0;
-        return this.cost * weight;
+        return this.getStandardPackageCost(weight);
     }
 
     public getStandardPackageCost(weight: number): number {

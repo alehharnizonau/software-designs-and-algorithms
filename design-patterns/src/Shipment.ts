@@ -2,12 +2,12 @@ import {IShipment, IShipmentData, ShipmentType} from "./types";
 import {AirEastStrategy, ChicagoSprintStrategy, PacificParcelStrategy, ShipmentStrategy, Shipper} from "./Shipper";
 
 export class Shipment implements IShipment {
-    shipmentID: number = 0;
-    weight: number;
-    fromAddress: string;
-    fromZipCode: string;
-    toAddress: string;
-    toZipCode: string;
+    private shipmentID: number = 0;
+    private readonly weight: number;
+    private readonly fromAddress: string;
+    private readonly fromZipCode: string;
+    private readonly toAddress: string;
+    private toZipCode: string;
 
     constructor({shipmentID, weight, fromAddress, toAddress, fromZipCode, toZipCode}: IShipmentData) {
         this.shipmentID = shipmentID ? shipmentID : this.getShipmentID();
@@ -27,7 +27,7 @@ export class Shipment implements IShipment {
     };
 
     public ship(): string {
-        return `Shipment ID: ${this.shipmentID}, from: ${this.fromAddress}, to: ${this.toAddress}, cost: ${this.getCost()}$`
+        return `Shipment with the ID ${this.shipmentID} will be picked up from ${this.fromAddress} and shipped to ${this.toAddress} \nCost = ${this.getCost()}`
     }
 
     private getCost(): number {

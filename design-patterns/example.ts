@@ -7,7 +7,10 @@ const data: IShipmentData = {
     fromAddress: 'Atlanta',
     fromZipCode: '72222',
     toAddress: 'Detroit',
-    toZipCode: '77777'
+    toZipCode: '77777',
+    isFragile: true,
+    isDoNotLeave: true,
+    isReturnReceiptRequired: true
 }
 
 const client = new Client();

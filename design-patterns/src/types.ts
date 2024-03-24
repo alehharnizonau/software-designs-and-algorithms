@@ -6,7 +6,10 @@ export interface IShipmentData {
     fromAddress: string,
     fromZipCode: string,
     toAddress: string,
-    toZipCode: string
+    toZipCode: string,
+    isFragile: boolean;
+    isDoNotLeave: boolean;
+    isReturnReceiptRequired: boolean;
 }
 
 export interface IShipment {
@@ -25,4 +28,12 @@ export enum ShipmentType {
     Letter = 'letter',
     Package = 'package',
     Oversized = 'oversized',
+}
+
+
+export interface IShipmentDecorator {
+    shipment: Shipment;
+    isFragile: boolean;
+    isDoNotLeave: boolean;
+    isReturnReceiptRequired: boolean;
 }
