@@ -16,7 +16,13 @@ export interface IShipment {
 }
 
 export enum ShipmentCosts {
-    airEast = 0.39,
-    chicagoSprint = 0.42,
-    pacificParcel = 0.51
+    AirEast = 0.39,
+    ChicagoSprint = 0.42,
+    PacificParcel = 0.51
+}
+
+export enum ShipmentType {
+    Letter = 'letter',
+    Package = 'package',
+    Oversized = 'oversized',
 }
