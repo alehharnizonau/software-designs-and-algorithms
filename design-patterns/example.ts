@@ -3,11 +3,11 @@ import {Client} from "./src/Client";
 
 const data: IShipmentData = {
     shipmentID: 1,
-    weight: 2,
-    fromAddress: 'Mogilev',
-    fromZipCode: '21200',
-    toAddress: 'Minsk',
-    toZipCode: '25200'
+    weight: 50,
+    fromAddress: 'Atlanta',
+    fromZipCode: '12222',
+    toAddress: 'Detroit',
+    toZipCode: '77777'
 }
 
 const client = new Client();

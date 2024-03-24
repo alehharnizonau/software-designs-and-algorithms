@@ -1,6 +1,5 @@
 import {IShipment, IShipmentData} from "./types";
-
-const ONCECOST = 0.39;
+import {Shipper} from "./Shipper";
 
 export class Shipment implements IShipment {
     shipmentID: number = 0;
@@ -28,6 +27,13 @@ export class Shipment implements IShipment {
     };
 
     public ship(): string {
-        return `Shipment ID: ${this.shipmentID}, from: ${this.fromAddress}, to: ${this.toAddress}, cost: ${ONCECOST * this.weight}`
+        return `Shipment ID: ${this.shipmentID}, from: ${this.fromAddress}, to: ${this.toAddress}, cost: ${this.getCost()}$`
+    }
+
+    private getCost(): number {
+        const shipper: Shipper = new Shipper();
+        shipper.setStrategy(this.fromZipCode);
+
+        return shipper.getCost(this.weight);
     }
 }

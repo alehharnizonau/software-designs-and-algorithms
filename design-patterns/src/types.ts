@@ -14,3 +14,9 @@ export interface IShipment {
     getShipmentID: () => number;
     ship: () => string;
 }
+
+export enum ShipmentCosts {
+    airEast = 0.39,
+    chicagoSprint = 0.42,
+    pacificParcel = 0.51
+}
