@@ -1,5 +1,5 @@
 import {IShipment, IShipmentData} from "./types";
-import {Shipper} from "./Shipper";
+import {AirEastStrategy, ChicagoSprintStrategy, PacificParcelStrategy, ShipmentStrategy, Shipper} from "./Shipper";
 
 export class Shipment implements IShipment {
     shipmentID: number = 0;
@@ -32,8 +32,23 @@ export class Shipment implements IShipment {
 
     private getCost(): number {
         const shipper: Shipper = new Shipper();
-        shipper.setStrategy(this.fromZipCode);
+        shipper.setStrategy(this.getShipperStrategy());
 
-        return shipper.getCost(this.weight);
+        return shipper.getCostStrategy(this.weight);
     }
+
+    private getShipperStrategy(): ShipmentStrategy {
+        switch (this.fromZipCode[0]) {
+            case '4':
+            case '5':
+            case '6':
+                return new ChicagoSprintStrategy();
+            case '7':
+            case '8':
+            case '9':
+                return new PacificParcelStrategy();
+            default :
+                return new AirEastStrategy();
+        }
+    };
 }
