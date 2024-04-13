@@ -1,0 +1,21 @@
+{
+  "name": "homework-task-6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node src/graphGenerator.ts",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Aleh Harnizonau",
+  "license": "ISC",
+  "dependencies": {
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "prettier": {
+    "printWidth": 120
+  }
+}
