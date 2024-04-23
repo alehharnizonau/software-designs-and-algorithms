@@ -2,12 +2,13 @@
   "name": "scheduler-homework",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest",
     "test:queue": "jest test/PriorityQueue.test.ts",
-    "test:scheduler": "jest test/Scheduler.test.ts"
+    "test:scheduler": "jest test/Scheduler.test.ts",
+    "start": "ts-node index.ts"
   },
   "keywords": [],
   "author": "",
