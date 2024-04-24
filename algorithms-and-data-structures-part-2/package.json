@@ -11,7 +11,7 @@
     "start": "ts-node index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Aleh Harnizonau",
   "license": "ISC",
   "dependencies": {
     "@types/jest": "^29.5.12",
