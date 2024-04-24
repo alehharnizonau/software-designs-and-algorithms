@@ -28,43 +28,49 @@ export class PriorityQueue<T> implements PriorityQueueI<T> {
         return this.minHeap.length;
     }
 
-    private left(): number {
-        return 2 * this.index + 1
-    };
-
-    private right(): number {
-        return 2 * this.index + 2
-    };
-
-    private getChild(): number {
-        return this.right() < this.size() && this.comparator(this.left(), this.right()) > 0
-            ? this.right()
-            : this.left()
-    };
-
-    private getParent(): number {
-        return Math.ceil(this.index / 2) - 1
+    private parentIndex(): number {
+        return Math.ceil(this.index / 2) - 1;
     }
-
-    private comparator = (i1: number, i2: number): number => this.minHeap[i1].priority - this.minHeap[i2].priority;
 
     private bubbleUp(): void {
         this.index = this.size() - 1;
 
-        while (this.getParent() >= 0 && this.comparator(this.getParent(), this.index) > 0) {
-            this.swap(this.getParent(), this.index);
-            this.index = this.getParent();
+        while (this.parentIndex() >= 0 && this.comparator(this.parentIndex(), this.index) > 0) {
+            const parentIndex: number = this.parentIndex();
+            this.swap(parentIndex, this.index);
+            this.index = parentIndex;
         }
     }
 
-    private bubbleDown() {
+    private leftChildIndex(): number {
+        return 2 * this.index + 1;
+    }
+
+    private rightChildIndex(): number {
+        return 2 * this.index + 2;
+    }
+
+    private hasChild(index: number): boolean {
+        return index < this.size();
+    }
+
+    private getChildIndex(): number {
+        return (this.hasChild(this.rightChildIndex()) && this.comparator(this.leftChildIndex(), this.rightChildIndex()) > 0
+            ? this.rightChildIndex()
+            : this.leftChildIndex());
+    }
+
+    private bubbleDown(): void {
         this.index = 0;
 
-        while (this.left() < this.size() && this.comparator(this.index, this.getChild()) > 0) {
-            this.swap(this.index, this.getChild());
-            this.index = this.getChild();
+        while (this.hasChild(this.leftChildIndex()) && this.comparator(this.index, this.getChildIndex()) > 0) {
+            const childIndex: number = this.getChildIndex();
+            this.swap(this.index, childIndex);
+            this.index = childIndex;
         }
     }
+
+    private comparator = (i1: number, i2: number): number => this.minHeap[i1].priority - this.minHeap[i2].priority;
 
     private swap(i1: number, i2: number): void {
         [this.minHeap[i1], this.minHeap[i2]] = [this.minHeap[i2], this.minHeap[i1]];

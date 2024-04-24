@@ -1,14 +1,25 @@
+import {PriorityQueue} from "./PriorityQueue";
+
+type TaskFn = () => Promise<any>;
+
 export interface SchedulerI {
-    postTask(task: () => Promise<any>, priority: number): void;
+    postTask(task: TaskFn, priority: number): void;
 
     run(): Promise<void>;
 }
 
 export class Scheduler implements SchedulerI {
-    postTask(task: () => Promise<any>, priority: number): void {
+    public pq: PriorityQueue<TaskFn> = new PriorityQueue<TaskFn>();
+
+    public postTask(task: TaskFn, priority: number): void {
+        this.pq.enqueue(task, priority);
     }
 
-    run(): Promise<void> {
-        return Promise.resolve()
+    public run(): Promise<void> {
+        while (this.pq.size() > 0) {
+            const task: TaskFn = this.pq.dequeue();
+            task();
+        }
+        return Promise.resolve();
     }
 }
